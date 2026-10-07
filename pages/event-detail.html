@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr" id="main-html">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LUMS Tech Fusion 2026 — UniEvents Pakistan</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+    :root{ --navy:#0F172A; --blue:#2563EB; --blue-deep:#1D4ED8; --gold:#B4870F; --gold-soft:#F6EBCF; --paper:#FFFDF7; --bg:#F8FAFC; --line:#E2E8F0; }
+    body{ font-family:'Plus Jakarta Sans', sans-serif; background:var(--bg); }
+    .urdu-font, .urdu-font *{ font-family:'Noto Nastaliq Urdu', serif !important; line-height:2.1; }
+    .mono{ font-family:'IBM Plex Mono', monospace; }
+    .lang-transition{ transition:all .25s ease-in-out; }
+    .datebadge{ display:inline-flex; flex-direction:column; align-items:center; justify-content:center; width:64px; height:68px; background:var(--navy); border-radius:12px; color:white; flex-shrink:0; }
+    .ticket-panel{ background:var(--paper); border:1px solid var(--line); border-radius:20px; }
+    .stub-line{ border-top:2px dashed var(--line); position:relative; }
+    .stub-line::before,.stub-line::after{ content:""; position:absolute; top:-11px; width:22px; height:22px; background:var(--bg); border-radius:50%; }
+    .stub-line::before{ left:-11px; } .stub-line::after{ right:-11px; }
+    [dir="rtl"] .stub-line::before{ left:auto; right:-11px; }
+    [dir="rtl"] .stub-line::after{ right:auto; left:-11px; }
+    .info-row + .info-row{ border-top:1px solid var(--line); }
+</style>
+</head>
+<body class="text-slate-800 antialiased lang-transition">
+
+<header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/80 px-6 py-4 flex justify-between items-center max-w-7xl mx-auto rounded-b-xl shadow-sm">
+    <div class="text-2xl font-extrabold text-blue-600 tracking-tight" data-i18n="logo">UniEvents PK</div>
+    <nav class="hidden md:flex items-center gap-8 font-medium text-slate-600">
+        <a href="../index.html" class="hover:text-blue-600 transition" data-i18n="navHome">Home</a>
+        <a href="events.html" class="hover:text-blue-600 transition" data-i18n="navBrowse">Browse Events</a>
+        <a href="../index.html#how" class="hover:text-blue-600 transition" data-i18n="navHow">How It Works</a>
+        <a href="about.html" class="hover:text-blue-600 transition" data-i18n="navAbout">About</a>
+    </nav>
+    <div class="flex items-center gap-3">
+        <select id="lang-switcher" class="border border-slate-300 rounded-lg px-3 py-1.5 text-sm bg-white font-medium text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 cursor-pointer" onchange="switchLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ur">اردو</option>
+        </select>
+    </div>
+</header>
+
+<!-- Breadcrumb -->
+<div class="max-w-5xl mx-auto px-4 pt-8 text-sm text-slate-400">
+    <a href="../index.html" class="hover:text-blue-600" data-i18n="crumbHome">Home</a>
+    <span> / </span>
+    <a href="events.html" class="hover:text-blue-600" data-i18n="navBrowse">Browse Events</a>
+    <span> / </span>
+    <span class="text-slate-600" data-i18n="evTitle">LUMS Tech Fusion 2026</span>
+</div>
+
+<!-- Event banner -->
+<section class="max-w-5xl mx-auto px-4 pt-6">
+    <div class="bg-slate-900 rounded-3xl h-56 md:h-72 flex items-end p-8 relative overflow-hidden">
+        <div id="event-poster" class="absolute inset-0 opacity-[0.08]" style="background-image:radial-gradient(circle, white 1px, transparent 1px); background-size:16px 16px;"></div>
+        <div class="relative">
+            <span class="inline-block bg-blue-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-3" data-i18n="evCat">Tech Fest</span>
+            <h1 class="text-2xl md:text-4xl font-black text-white" data-i18n="evTitle">LUMS Tech Fusion 2026</h1>
+        </div>
+    </div>
+</section>
+
+<!-- Main content -->
+<section class="max-w-5xl mx-auto px-4 py-10 grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">
+
+    <div>
+        <h2 class="text-xl font-bold text-slate-900 mb-3" data-i18n="aboutTitle">About This Event</h2>
+        <p class="text-slate-600 leading-relaxed mb-6" data-i18n="evDesc1">
+            LUMS Tech Fusion is one of Pakistan's largest student-run technology festivals, bringing together over 3,000 students from universities across the country for two days of hackathons, robotics competitions, AI workshops, and startup pitch sessions.
+        </p>
+        <p class="text-slate-600 leading-relaxed mb-6" data-i18n="evDesc2">
+            This year's edition features a 24-hour hackathon with a Rs. 500,000 prize pool, guest sessions from leading Pakistani tech founders, and an exhibition hall showcasing final-year projects from computer science departments nationwide.
+        </p>
+
+        <h3 class="font-bold text-slate-900 mb-3" data-i18n="scheduleTitle">Schedule Highlights</h3>
+        <ul class="space-y-3 mb-8">
+            <li class="flex gap-3 text-sm text-slate-600"><span class="mono text-slate-400 shrink-0">09:00</span><span data-i18n="sch1">Opening ceremony & keynote address</span></li>
+            <li class="flex gap-3 text-sm text-slate-600"><span class="mono text-slate-400 shrink-0">11:00</span><span data-i18n="sch2">24-hour hackathon kickoff</span></li>
+            <li class="flex gap-3 text-sm text-slate-600"><span class="mono text-slate-400 shrink-0">14:00</span><span data-i18n="sch3">Robotics competition finals</span></li>
+            <li class="flex gap-3 text-sm text-slate-600"><span class="mono text-slate-400 shrink-0">17:00</span><span data-i18n="sch4">Startup pitch showcase</span></li>
+        </ul>
+
+        <h3 class="font-bold text-slate-900 mb-3" data-i18n="organizerTitle">Organized By</h3>
+        <div class="flex items-center gap-3 mb-8">
+            <div class="w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold">LC</div>
+            <div>
+                <p class="font-semibold text-slate-900" data-i18n="organizerName">LUMS Computing Society</p>
+                <p class="text-sm text-slate-500" data-i18n="organizerVerified">Verified organizer</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket-style sidebar card -->
+    <aside class="ticket-panel h-fit sticky top-24">
+        <div class="p-6">
+            <div class="flex items-center gap-4 mb-5">
+                <div class="datebadge">
+                    <span class="mono text-xl font-semibold leading-none">14</span>
+                    <span class="mono text-[10px] tracking-wide mt-1" data-i18n="evMonth">AUG</span>
+                </div>
+                <div>
+                    <p class="font-semibold text-slate-900" data-i18n="evDateFull">Friday, August 14, 2026</p>
+                    <p class="text-sm text-slate-500" data-i18n="evTime">9:00 AM – 6:00 PM</p>
+                </div>
+            </div>
+            <div class="info-row py-3 flex justify-between text-sm">
+                <span class="text-slate-500" data-i18n="labelVenue">Venue</span>
+                <span class="font-medium text-slate-900 text-right" data-i18n="evVenue">LUMS, Lahore</span>
+            </div>
+            <div class="info-row py-3 flex justify-between text-sm">
+                <span class="text-slate-500" data-i18n="labelEntry">Entry</span>
+                <span class="font-medium text-emerald-600" data-i18n="evEntry">Free</span>
+            </div>
+            <div class="info-row py-3 flex justify-between text-sm">
+                <span class="text-slate-500" data-i18n="labelCode">Event Code</span>
+                <span class="font-medium text-slate-900 mono">#UEP-14AUG</span>
+            </div>
+        </div>
+        <div class="stub-line px-6 py-5">
+            <a id="register-event" href="book-ticket.html" class="block text-center bg-blue-600 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg shadow-blue-500/20 hover:bg-blue-700 transition" data-i18n="registerBtn">Register Now</a>
+            <p class="text-xs text-center text-slate-400 mt-3" data-i18n="registerNote">You'll be redirected to the organizer's registration form.</p>
+        </div>
+    </aside>
+</section>
+
+<footer class="border-t border-slate-200/80 bg-white">
+    <div class="max-w-6xl mx-auto px-4 py-10 text-center text-xs text-slate-400" data-i18n="footerRights">© 2026 UniEvents PK. All rights reserved.</div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../main.js"></script>
+<script>
+    const translations = {
+        en:{
+            logo:"UniEvents PK", navHome:"Home", navBrowse:"Browse Events", navHow:"How It Works", navAbout:"About", crumbHome:"Home",
+            evCat:"Tech Fest", evTitle:"LUMS Tech Fusion 2026",
+            aboutTitle:"About This Event",
+            evDesc1:"LUMS Tech Fusion is one of Pakistan's largest student-run technology festivals, bringing together over 3,000 students from universities across the country for two days of hackathons, robotics competitions, AI workshops, and startup pitch sessions.",
+            evDesc2:"This year's edition features a 24-hour hackathon with a Rs. 500,000 prize pool, guest sessions from leading Pakistani tech founders, and an exhibition hall showcasing final-year projects from computer science departments nationwide.",
+            scheduleTitle:"Schedule Highlights",
+            sch1:"Opening ceremony & keynote address", sch2:"24-hour hackathon kickoff", sch3:"Robotics competition finals", sch4:"Startup pitch showcase",
+            organizerTitle:"Organized By", organizerName:"LUMS Computing Society", organizerVerified:"Verified organizer",
+            evMonth:"AUG", evDateFull:"Friday, August 14, 2026", evTime:"9:00 AM – 6:00 PM",
+            labelVenue:"Venue", evVenue:"LUMS, Lahore", labelEntry:"Entry", evEntry:"Free", labelCode:"Event Code",
+            registerBtn:"Register Now", registerNote:"You'll be redirected to the organizer's registration form.",
+            footerRights:"© 2026 UniEvents PK. All rights reserved to MSUKASHA SMC-PRIVATE LIMITED.", dir:"ltr"
+        },
+        ur:{
+            logo:"یونی ایونٹس PK", navHome:"ہوم", navBrowse:"ایونٹس دیکھیں", navHow:"طریقہ کار", navAbout:"ہمارے بارے میں", crumbHome:"ہوم",
+            evCat:"ٹیک فیسٹ", evTitle:"LUMS ٹیک فیوژن 2026",
+            aboutTitle:"اس ایونٹ کے بارے میں",
+            evDesc1:"LUMS ٹیک فیوژن پاکستان کے سب سے بڑے طلباء کے زیرِ انتظام ٹیکنالوجی فیسٹیولز میں سے ایک ہے، جو ملک بھر کی یونیورسٹیوں سے 3,000 سے زائد طلباء کو ہیکاتھونز، روبوٹکس مقابلوں، AI ورکشاپس اور اسٹارٹ اپ پچ سیشنز کے دو دنوں کے لیے اکٹھا کرتا ہے۔",
+            evDesc2:"اس سال کے ایڈیشن میں روپے 500,000 انعامی رقم کے ساتھ 24 گھنٹے کا ہیکاتھون، معروف پاکستانی ٹیک بانیوں کے گیسٹ سیشنز، اور ملک بھر کے کمپیوٹر سائنس شعبہ جات کے فائنل ایئر پراجیکٹس کی نمائش شامل ہے۔",
+            scheduleTitle:"شیڈول جھلکیاں",
+            sch1:"افتتاحی تقریب اور کلیدی خطاب", sch2:"24 گھنٹے کے ہیکاتھون کا آغاز", sch3:"روبوٹکس مقابلے کے فائنلز", sch4:"اسٹارٹ اپ پچ شوکیس",
+            organizerTitle:"منتظم", organizerName:"LUMS کمپیوٹنگ سوسائٹی", organizerVerified:"تصدیق شدہ منتظم",
+            evMonth:"اگست", evDateFull:"جمعہ، 14 اگست 2026", evTime:"صبح 9:00 – شام 6:00",
+            labelVenue:"مقام", evVenue:"LUMS، لاہور", labelEntry:"انٹری", evEntry:"مفت", labelCode:"ایونٹ کوڈ",
+            registerBtn:"ابھی رجسٹر کریں", registerNote:"آپ کو منتظم کے رجسٹریشن فارم پر بھیج دیا جائے گا۔",
+            footerRights:"© 2026 یونی ایونٹس PK۔ جملہ حقوق MSUKASHA SMC-PRIVATE LIMITED کے نام محفوظ ہیں۔", dir:"rtl"
+        }
+    };
+
+    function switchLanguage(lang){
+        const htmlTag = document.getElementById('main-html');
+        const data = translations[lang];
+        document.querySelectorAll('[data-i18n]').forEach(el => { if(data[el.getAttribute('data-i18n')] !== undefined) el.innerText = data[el.getAttribute('data-i18n')]; });
+        htmlTag.setAttribute('dir', data.dir);
+        document.body.classList.toggle('urdu-font', lang === 'ur');
+        document.querySelector('nav').classList.toggle('flex-row-reverse', lang === 'ur');
+    }
+
+    async function loadEvent() {
+        const eventId = new URLSearchParams(location.search).get('id');
+        const titles = document.querySelectorAll('[data-i18n="evTitle"]');
+        const register = document.getElementById('register-event');
+        if (!eventId || !window.UniAPI) {
+            titles.forEach(title => title.textContent = eventId ? 'Backend is not configured.' : 'Event not found. Browse events and choose a listing.');
+            register.classList.add('hidden');
+            return;
+        }
+        try {
+            const event = await window.UniAPI.getEvent(eventId);
+            titles.forEach(title => title.textContent = event.title);
+            document.querySelector('[data-i18n="evCat"]').textContent = event.category;
+            document.querySelector('[data-i18n="evDesc1"]').textContent = event.description || '';
+            document.querySelector('[data-i18n="evDesc2"]').hidden = true;
+            document.querySelector('[data-i18n="organizerName"]').textContent = event.organization_name;
+            document.querySelector('[data-i18n="evVenue"]').textContent = event.venue;
+            document.querySelector('[data-i18n="evDateFull"]').textContent = new Intl.DateTimeFormat('en', { dateStyle: 'full' }).format(new Date(`${event.event_date}T00:00:00`));
+            document.querySelector('[data-i18n="evTime"]').textContent = event.start_time ? event.start_time.slice(0, 5) : '';
+            document.querySelector('[data-i18n="evMonth"]').textContent = new Intl.DateTimeFormat('en', { month: 'short' }).format(new Date(`${event.event_date}T00:00:00`)).toUpperCase();
+            document.querySelector('[data-i18n="labelCode"]').nextElementSibling.textContent = event.event_code || '';
+            const cheapest = (event.ticket_tiers || []).reduce((lowest, tier) => Math.min(lowest, tier.price_pkr), Infinity);
+            document.querySelector('[data-i18n="evEntry"]').textContent = event.is_free ? 'Free' : (Number.isFinite(cheapest) ? `From Rs. ${cheapest.toLocaleString()}` : 'Paid');
+            const date = new Date(`${event.event_date}T00:00:00`);
+            document.querySelector('.datebadge .mono.text-xl').textContent = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(date);
+            register.href = `book-ticket.html?event=${encodeURIComponent(event.id)}`;
+            if (event.poster_url) {
+                const poster = document.getElementById('event-poster');
+                poster.style.opacity = '1';
+                poster.style.backgroundImage = `linear-gradient(90deg, rgba(15,23,42,.82), rgba(15,23,42,.1)), url("${event.poster_url}")`;
+                poster.style.backgroundSize = 'cover';
+                poster.style.backgroundPosition = 'center';
+            }
+        } catch (error) {
+            titles.forEach(title => title.textContent = error.message || 'Could not load this event.');
+            register.classList.add('hidden');
+        }
+    }
+
+    loadEvent();
+</script>
+</body>
+</html>

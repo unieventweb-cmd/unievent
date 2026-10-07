@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Status — UniEvents Pakistan</title>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+    body{ font-family:'Plus Jakarta Sans', sans-serif; background:#F8FAFC; }
+    .mono{ font-family:'IBM Plex Mono', monospace; }
+</style>
+</head>
+<body class="min-h-screen text-slate-800 antialiased">
+<header class="bg-white border-b border-slate-200 px-6 py-4">
+    <a href="../index.html" class="text-2xl font-extrabold text-blue-600 tracking-tight">UniEvents PK</a>
+</header>
+
+<main class="max-w-lg mx-auto px-4 py-16">
+    <div id="card" class="bg-white border border-slate-200 rounded-2xl shadow-sm p-8 text-center">
+        <h1 id="title" class="text-2xl font-black text-slate-900 mb-2">Please wait…</h1>
+        <p id="msg" class="text-slate-500 text-sm">Checking your payment.</p>
+        <div id="ticket" class="hidden mt-6 border-2 border-dashed border-slate-200 rounded-xl p-5">
+            <p class="text-xs text-slate-400 mb-1">YOUR TICKET CODE</p>
+            <p id="code" class="mono text-xl font-semibold text-slate-900"></p>
+            <p id="evt" class="text-sm text-slate-500 mt-1"></p>
+        </div>
+        <div class="mt-8 flex gap-3 justify-center">
+            <a id="primary" href="book-ticket.html" class="hidden bg-blue-600 text-white font-semibold px-5 py-3 rounded-xl hover:bg-blue-700 transition text-sm">My Tickets</a>
+            <a href="events.html" class="border border-slate-300 text-slate-700 font-semibold px-5 py-3 rounded-xl hover:bg-slate-50 transition text-sm">Browse Events</a>
+        </div>
+    </div>
+</main>
+
+<script>
+(async function () {
+    const q = new URLSearchParams(location.search);
+    const $ = (id) => document.getElementById(id);
+    const show = (title, msg, color) => {
+        $('title').textContent = title;
+        $('msg').textContent = msg;
+        $('title').className = 'text-2xl font-black mb-2 ' + color;
+    };
+
+    /* Easypaisa step 2: hand the auth token to Easypay's Confirm page (hosts are whitelisted). */
+    if (q.get('step') === 'easypaisa_confirm') {
+        try {
+            const action = new URL(q.get('action'));
+            const back = new URL(q.get('post_back'));
+            if (action.protocol !== 'https:' || !action.hostname.endsWith('.easypaisa.com.pk')) throw 0;
+            if (back.protocol !== 'https:' || !back.hostname.endsWith('.supabase.co')) throw 0;
+            show('Redirecting to Easypaisa…', 'Please do not close this page.', 'text-slate-900');
+            UniAPI.postForm(action.href, { auth_token: q.get('auth_token'), postBackURL: back.href });
+        } catch (e) {
+            show('Payment error', 'Invalid payment redirect. Please try again from your bookings.', 'text-red-600');
+        }
+        return;
+    }
+
+    const status = q.get('status');
+    const ref = q.get('ref');
+
+    if (status === 'paid') {
+        show('Payment successful ✓', 'Your ticket is confirmed. Show the QR / code below with your university ID at the gate.', 'text-emerald-600');
+        $('primary').classList.remove('hidden');
+        try {
+            const bk = ref && await UniAPI.bookingByTxnRef(ref);
+            if (bk) {
+                $('code').textContent = bk.ticket_code;
+                $('evt').textContent = bk.events ? bk.events.title : '';
+                $('ticket').classList.remove('hidden');
+            }
+        } catch (e) { /* ticket still visible under My Tickets */ }
+    } else if (status === 'pending') {
+        show('Payment under verification', 'We could not confirm your payment yet. If money was deducted, your ticket will appear in My Tickets shortly — otherwise please try again.', 'text-amber-600');
+        $('primary').classList.remove('hidden');
+    } else if (status === 'failed') {
+        show('Payment failed', 'Your payment was not completed and you have not been charged. You can try again from My Tickets.', 'text-red-600');
+        $('primary').classList.remove('hidden');
+    } else {
+        show('Payment status', 'Nothing to show here. Open My Tickets to see your bookings.', 'text-slate-900');
+        $('primary').classList.remove('hidden');
+    }
+})();
+</script>
+</body>
+</html>
