@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: unieventweb-live
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_CLIENT_DIR
+        value: Backend/js
+      - key: WEB_CONCURRENCY
+        value: "1"
